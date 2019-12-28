@@ -18,7 +18,7 @@ def homepage():
     <img src="http://loremflickr.com/600/400">
     """.format(time=the_time)
 
-@app.route('/test')
+@app.route('/test', methods=['POST'])
 def testpage():
     return"""<h1>Test Page</h1>"""
 
