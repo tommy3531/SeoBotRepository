@@ -4,7 +4,6 @@ from flask import Flask
 
 import requests
 
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -18,7 +17,7 @@ def homepage():
     <img src="http://loremflickr.com/600/400">
     """.format(time=the_time)
 
-@app.route('/test', methods=['POST'])
+@app.route('/test', methods=['GET', 'POST'])
 def testpage():
     # return"""<h1>Test Page</h1>"""
 
@@ -32,8 +31,7 @@ def testpage():
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-
     return response.text
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run()
