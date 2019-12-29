@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Flask
 
-from slack import RTMClient
+import requests
 
 
 app = Flask(__name__)
@@ -20,20 +20,20 @@ def homepage():
 
 @app.route('/test', methods=['POST'])
 def testpage():
-    return"""<h1>Test Page</h1>"""
+    # return"""<h1>Test Page</h1>"""
 
-    url = "https://canssens-seo-extraction-v1.p.rapidapi.com/seo/api/"
+    url = "https://twinesocial.p.rapidapi.com/v1/content"
 
-    payload = "url=www.mashape.com"
+    querystring = {"campaign": "louboutin"}
+
     headers = {
-        'x-rapidapi-host': "canssens-seo-extraction-v1.p.rapidapi.com",
-        'x-rapidapi-key': "zjgGHjiZ0Xmsh3ZyiBkvbEY02oasp1sLHlojsnOF9ZMrOtFmcA",
-        'content-type': "application/x-www-form-urlencoded"
-        }
+        'x-rapidapi-host': "twinesocial.p.rapidapi.com",
+        'x-rapidapi-key': "zjgGHjiZ0Xmsh3ZyiBkvbEY02oasp1sLHlojsnOF9ZMrOtFmcA"
+    }
 
-    response = requests.request("POST", url, data=payload, headers=headers)
+    response = requests.request("GET", url, headers=headers, params=querystring)
 
-    print(response.text)
+    return response.text
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
